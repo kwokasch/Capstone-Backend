@@ -2,7 +2,21 @@
 const knex = require('./knex');
 
 module.exports = {
-    getAllPets(){
+    //User Methods
+    getAllUsers(){
+        return knex('users')
+    },
+
+    getUser(id){
+        return knex('users').where('id', id).first()
+    },
+
+    createUser(user){
+        return knex('users').insert(user, '*')
+    },
+
+    //Pet Methods
+    getAllPets(){ 
         return knex('pets')
     },
 

@@ -2,7 +2,6 @@ const express = require('express')
 const router = express.Router()
 const queries = require('../db/queries')
 
-
 //middleware function
 function isValidId(request, response, next){
     if(!isNaN(request.params.id)) return next()
