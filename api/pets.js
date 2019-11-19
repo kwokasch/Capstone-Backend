@@ -26,6 +26,7 @@ router.get('/:id', isValidId, (request, response) => {
 })
 
 router.post('/', (request, response) => {
+    console.log(request.body)
     queries.createPet(request.body).then(pets => {
         return response.json(pets[0])
     })

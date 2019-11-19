@@ -1,0 +1,5 @@
+#petfinder API requests
+.env
+
+#hide node modules
+node_modules

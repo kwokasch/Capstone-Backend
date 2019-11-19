@@ -3,12 +3,17 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const fetch = require('node-fetch');
+var request = require("request");
+var rp = require('request-promise');
+require('dotenv').config();
 
 var app = express();
 var cors = require('cors');
 
 const pets = require('./api/pets');
 const users = require('./api/users');
+const petfinder = require('./api/petfinder');
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -24,6 +29,8 @@ app.use(function(req, res, next) {
 
 app.use('/pets', pets)
 app.use('/users', users)
+app.use('/petfinder', petfinder)
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
