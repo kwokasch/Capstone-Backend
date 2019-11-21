@@ -1,6 +1,7 @@
 const passport = require('passport');
 const express = require('express');
 require('../passport/google');
+const router = express.Router();
 
 router.get('/google',
   passport.authenticate('google', {

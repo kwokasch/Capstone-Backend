@@ -16,6 +16,16 @@ module.exports = {
         return knex('users').insert(user, '*')
     },
 
+    findOrCreate(user){
+        if (!user){
+            this.createUser(user)
+        }
+    }
+
+    findByEmail(email){
+        return knex('users').where('email', email).first()
+    },
+
     //Pet Methods
     getAllPets(){ 
         return knex('pets')

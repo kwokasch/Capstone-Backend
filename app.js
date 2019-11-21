@@ -1,6 +1,6 @@
 const createError = require('http-errors');
 const express = require('express');
-const passport = require('./passport/passport');
+const passport = require('passport');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
@@ -14,9 +14,12 @@ require('dotenv').config();
 const app = express();
 const cors = require('cors');
 
+const auth = require('./auth/index')
 const pets = require('./api/pets');
 const users = require('./api/users');
 const petfinder = require('./api/petfinder');
+
+app.listen(3000);
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -30,6 +33,7 @@ app.use(function(req, res, next) {
   next();
 });
 
+app.use('/auth', auth)
 app.use('/pets', pets)
 app.use('/users', users)
 app.use('/petfinder', petfinder)

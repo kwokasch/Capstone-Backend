@@ -26,8 +26,8 @@ router.post('/', (request, response) => {
         request.body.firstName && 
         request.body.lastName && 
         request.body.phoneNumber && 
-        request.body.email && 
-        request.body.password 
+        request.body.email
+        // request.body.password 
     ){
         queries.createUser(request.body).then(users => {
             return response.json(users[0])
