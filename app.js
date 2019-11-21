@@ -1,15 +1,18 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const passport = require('./passport/passport');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const logger = require('morgan');
 const fetch = require('node-fetch');
-var request = require("request");
-var rp = require('request-promise');
+const jwt = require('jsonwebtoken');
+const request = require('request');
+const rp = require('request-promise');
 require('dotenv').config();
 
-var app = express();
-var cors = require('cors');
+const app = express();
+const cors = require('cors');
 
 const pets = require('./api/pets');
 const users = require('./api/users');
@@ -39,8 +42,8 @@ app.use(function(req, res, next) {
 // error handler
 app.use(function(err, req, res, next) {
 
-  // render the error page
-  res.status(err.status || 500);
+// render the error page
+res.status(err.status || 500);
   res.json({
     message: err.message,
     error: err.statusCode

@@ -1,5 +1,6 @@
 //connection to db
 const knex = require('./knex');
+const bcrypt = require('bcrypt');
 
 module.exports = {
     //User Methods
@@ -27,7 +28,4 @@ module.exports = {
     createPet(pet){
         return knex('pets').insert(pet, '*')
     }
-
-    //PetFinder 
-    
 }

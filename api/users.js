@@ -7,11 +7,6 @@ function isValidId(request, response, next){
     next(new Error('Invalid ID'))
 }
 
-// router.get('/', (request, response) => {
-//     queries.getAllUsers().then(users => {
-//         response.json(users)
-//     })
-// })
 
 router.get('/:id', isValidId, (request, response) => {
     queries.getUser(request.params.id).then(user => {
@@ -25,6 +20,7 @@ router.get('/:id', isValidId, (request, response) => {
 })
 
 router.post('/', (request, response) => {
+    console.log('got post')
     console.log(request.body)
     if(
         request.body.firstName && 
