@@ -7,22 +7,17 @@ passport.use(new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
   callbackURL: '/auth/google/callback'
-}, function (accessToken, refreshToken, profile, cb) {
-    const email = profile.emails[0].value
-    console.log(email)
-    console.log(profile)
+}, function (accessToken, refreshToken, profile, done) {
+    // const email = profile.emails[0].value
     const formattedProfile = formatProfile(profile)
-    const user = users.findByEmail(email)
-    if (user) {
-
-    } else {
-        createUser()
-    }
-    return cb(new Error ('working on it...'))
+    const user = users.findOrCreate(formattedProfile)
+    // console.log(user)
+    return done(null, user)
 }))
 
 function formatProfile(profile){
     return {
+        googleId: profile.id,
         firstName: profile.name.givenName,
         lastName: profile.name.familyName,
         phoneNumber: "",

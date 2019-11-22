@@ -14,12 +14,15 @@ require('dotenv').config();
 const app = express();
 const cors = require('cors');
 
-const auth = require('./auth/index')
+const auth = require('./auth/index');
+
 const pets = require('./api/pets');
 const users = require('./api/users');
 const petfinder = require('./api/petfinder');
 
 app.listen(3000);
+
+
 
 app.use(logger('dev'));
 app.use(express.json());

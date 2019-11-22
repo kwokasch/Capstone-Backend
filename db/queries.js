@@ -18,9 +18,11 @@ module.exports = {
 
     findOrCreate(user){
         if (!user){
-            this.createUser(user)
+            createUser(user)
+        } else {
+            return user
         }
-    }
+    },
 
     findByEmail(email){
         return knex('users').where('email', email).first()

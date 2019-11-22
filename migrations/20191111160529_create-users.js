@@ -2,6 +2,7 @@
 exports.up = function(knex) {
   return knex.schema.createTable('users', (table) => {
       table.increments()
+      table.string('googleId')
       table.string('firstName')
       table.string('lastName')
       table.string('phoneNumber')

@@ -6,6 +6,7 @@ const router = express.Router();
 router.get('/google',
   passport.authenticate('google', {
     scope: ['profile', 'email']
+    // scope: ['https://www.googleapis.com/auth/plus.login']
   }));
 
 router.get('/google/callback', 
