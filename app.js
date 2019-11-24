@@ -11,9 +11,10 @@ const request = require('request');
 const rp = require('request-promise');
 require('dotenv').config();
 
+const { checkAuthHeaderSetUser, checkAuthHeaderSetUserUnAuthorized } = require('./middlewares/index')
+
 const app = express();
 const cors = require('cors');
-
 const auth = require('./auth/index');
 
 const pets = require('./api/pets');
@@ -22,19 +23,20 @@ const petfinder = require('./api/petfinder');
 
 app.listen(3000);
 
-
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-// app.use(cors());
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
+app.use(cors());
+app.use(passport.initialize());
+app.use(checkAuthHeaderSetUser);
+
+app.get('/', checkAuthHeaderSetUserUnAuthorized, (req, res) => {
+  res.json({
+    message: 'Auth works'
+  })
+})
 
 app.use('/auth', auth)
 app.use('/pets', pets)

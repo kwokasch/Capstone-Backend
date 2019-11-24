@@ -4,28 +4,32 @@ const bcrypt = require('bcrypt');
 
 module.exports = {
     //User Methods
-    getAllUsers(){
-        return knex('users')
+    async getAllUsers(){
+        return await knex('users')
     },
 
-    getUser(id){
-        return knex('users').where('id', id).first()
+    async getUser(id){
+        return await knex('users').where('id', id).first()
     },
 
-    createUser(user){
-        return knex('users').insert(user, '*')
+    async createUser(user){
+        return await knex('users').insert(user, '*')
     },
 
-    findOrCreate(user){
+    async findByEmail(email){
+        user = await knex('users').where('email', email).first()
+        return user
+    },
+
+    async findOrCreate(userProfile){
+        const email = userProfile.email
+        const user = await this.findByEmail(email)
+
         if (!user){
-            createUser(user)
+            await this.createUser(userProfile)
         } else {
             return user
         }
-    },
-
-    findByEmail(email){
-        return knex('users').where('email', email).first()
     },
 
     //Pet Methods
