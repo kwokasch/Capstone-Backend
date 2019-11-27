@@ -20,8 +20,6 @@ router.get('/:id', isValidId, (request, response) => {
 })
 
 router.post('/', (request, response) => {
-    console.log('got post')
-    console.log(request.body)
     if(
         request.body.firstName && 
         request.body.lastName && 
