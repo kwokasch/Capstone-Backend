@@ -1,8 +1,8 @@
-const passport = require('passport');
-const express = require('express');
-require('../passport/google');
-const { create } = require('./utils');
-const router = express.Router();
+// const passport = require('passport');
+// const express = require('express');
+// require('../passport/google');
+// const { create } = require('./jwtauth');
+// const router = express.Router();
 
 // router.get('/google',
 //   passport.authenticate('google', {
@@ -21,4 +21,4 @@ const router = express.Router();
 //   }) (req, res, next)
 // })
 
-module.exports = router;
+// module.exports = router;

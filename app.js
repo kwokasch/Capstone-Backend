@@ -1,3 +1,4 @@
+require('dotenv').config();
 const createError = require('http-errors');
 const express = require('express');
 const passport = require('passport');
@@ -6,12 +7,14 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
 const fetch = require('node-fetch');
-const jwt = require('jsonwebtoken');
-const request = require('request');
-const rp = require('request-promise');
-require('dotenv').config();
+// const rp = require('request-promise');
+const bcrypt = require('bcrypt')
+const knex = require('knex')
+const config = require('./knexfile')[process.env.NODE_ENV || "development"]
+const database = knex(config)
+const jwt = require('jsonwebtoken')
 
-const { checkAuthHeaderSetUser, checkAuthHeaderSetUserUnAuthorized } = require('./middlewares/index')
+// const { checkAuthHeaderSetUser, checkAuthHeaderSetUserUnAuthorized } = require('./middlewares/index')
 
 const app = express();
 const cors = require('cors');
@@ -27,18 +30,19 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(bodyParser.json())
 
 app.use(cors());
 app.use(passport.initialize());
-app.use(checkAuthHeaderSetUser);
+// app.use(checkAuthHeaderSetUser);
 
-app.get('/', checkAuthHeaderSetUserUnAuthorized, (req, res) => {
-  res.json({
-    message: 'Auth works'
-  })
-})
+// app.get('/', checkAuthHeaderSetUserUnAuthorized, (req, res) => {
+//   res.json({
+//     message: 'Auth works'
+//   })
+// })
 
-app.use('/auth', auth)
+// app.use('/auth', auth)
 app.use('/pets', pets)
 app.use('/users', users)
 app.use('/petfinder', petfinder)

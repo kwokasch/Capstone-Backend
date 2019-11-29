@@ -21,11 +21,11 @@ router.get('/:id', isValidId, (request, response) => {
 
 router.post('/', (request, response) => {
     if(
-        request.body.firstName && 
-        request.body.lastName && 
-        request.body.phoneNumber && 
-        request.body.email
-        // request.body.password 
+        // request.body.firstName && 
+        // request.body.lastName && 
+        // request.body.phoneNumber && 
+        request.body.email &&
+        request.body.password 
     ){
         queries.createUser(request.body).then(users => {
             return response.json(users[0])
