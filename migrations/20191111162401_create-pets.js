@@ -8,7 +8,7 @@ exports.up = function(knex) {
         table.string('gender')
         table.string('size')
         table.string('color')
-        table.integer('age')
+        table.string('age')
         table.string('breed')
         table.string('temperament')
         table.text('comments')

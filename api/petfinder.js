@@ -28,25 +28,44 @@ const retrieveToken = async() => {
         }}
     ).then(response => {
         process.env['TOKEN'] = response.data.access_token
-        // console.log(process.env['TOKEN'])
     })
 }
 
-router.get('/', async(req, resp) => {
-    await retrieveToken()
-    resp.json(await getAnimals())
-})
-
-const getAnimals = async() => {
+const getAnimals = async(url) => {
     const AuthStr = 'Bearer '.concat(process.env['TOKEN']); 
     
-    const response = await axios.get('https://api.petfinder.com/v2/animals?type=dog&page=2', {
+    const response = await axios.get(url, {
         headers: { Authorization: AuthStr}
     }).catch((error) => {
         console.log('error '+ error)
     })
     return response.data.animals
 }
+
+router.get('/', async(req, resp) => {
+    await retrieveToken()
+    resp.json(await getAnimals('https://api.petfinder.com/v2/animals?type=dog&page=2'))
+})
+
+router.post('/search', async(req, resp) => {
+    const url = 'https://api.petfinder.com/v2/animals'
+    
+    const {name, species, gender, size, color, age, breed, location} = req.body;
+
+    const nameParam = name ? `name=${name}` : '';
+    const speciesParam = species ? `&type=${species}` : '';
+    const genderParam = gender ? `&gender=${gender}` : '';
+    const sizeParam = size ? `&size=${size}` : '';
+    const colorParam = color ? `&color=${color}` : '';
+    const ageParam = age ? `&age=${age}` : '';
+    const breedParam = breed ? `&breed=${breed}` : '';
+    const locationParam = location ? `&location=${location}` : '';
+    const urlWithParams = `${url}?${nameParam}${speciesParam}${genderParam}${sizeParam}${colorParam}${ageParam}${breedParam}${locationParam}`
+    console.log('urlWithParams', urlWithParams)
+
+    await retrieveToken()
+    resp.json(await getAnimals(urlWithParams))
+})
 
 
 module.exports = router
