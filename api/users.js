@@ -7,28 +7,24 @@ function isValidId(request, response, next){
     next(new Error('Invalid ID'))
 }
 
-
 router.get('/:id', isValidId, (request, response) => {
     queries.getUser(request.params.id).then(user => {
         if(user){
             response.json(user)
         } else {
+            delete user.password
             response.sendStatus(404)
-            next()
         }
     })
 })
 
 router.post('/', (request, response) => {
     if(
-        // request.body.firstName && 
-        // request.body.lastName && 
-        // request.body.phoneNumber && 
         request.body.email &&
         request.body.password 
     ){
         queries.createUser(request.body).then(users => {
-            return response.json(users[0])
+            response.json(users[0])
         })
     } else {
         response.json({error: "Missing information"})

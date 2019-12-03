@@ -11,7 +11,6 @@ passport.use(new GoogleStrategy({
     const user = formatProfile(profile)
     try {
         users.findOrCreate(user)
-        console.log(user)
         return cb(null, user)
     } catch (error) {
         return cb(error)
