@@ -13,11 +13,15 @@ const database = knex(config)
 const jwt = require('jsonwebtoken')
 
 app.post('/users', (request, response) => {
-    const { email, password } = request.body
-
+    const { googleID, firstName, lastName, phoneNumber, email, password } = request.body
+    
     bcrypt.hash(password, 12).then(hashedPassword => {
         database('user')
             .insert({
+                googleID,
+                firstName,
+                lastName,
+                phoneNumber,
                 email,
                 password: hashedPassword
             }).returning('*')
