@@ -10,7 +10,7 @@ router.get('/google',
   }));
 
 router.get('/google/callback', (req, res, next) => {
-  passport.authenticate('google', {sessionl: false}, async (err, user) => {
+  passport.authenticate('google', {session: false}, async (err, user) => {
       if(err) { return next(err) }
       try {
         const token = await create(user)

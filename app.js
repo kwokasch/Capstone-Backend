@@ -18,6 +18,7 @@ const { checkAuthHeaderSetUser, checkAuthHeaderSetUserUnAuthorized, notFound, er
 const app = express();
 const cors = require('cors');
 const auth = require('./auth/index');
+const jwtauth = require('./auth/jwtauth')
 
 const pets = require('./api/pets');
 const users = require('./api/users');
