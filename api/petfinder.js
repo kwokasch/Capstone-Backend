@@ -61,7 +61,6 @@ router.post('/search', async(req, resp) => {
     const breedParam = breed ? `&breed=${breed}` : '';
     const locationParam = location ? `&location=${location}` : '';
     const urlWithParams = `${url}?${nameParam}${speciesParam}${genderParam}${sizeParam}${colorParam}${ageParam}${breedParam}${locationParam}`
-    console.log('urlWithParams', urlWithParams)
 
     await retrieveToken()
     resp.json(await getAnimals(urlWithParams))

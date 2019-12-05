@@ -97,7 +97,7 @@ module.exports = [
         size: "Small",
         color: "White",
         age: "Puppy",
-        breed: "Bulldog",
+        breed: "Chihuahua",
         temperament: "Nervous",
         comments: "Pip is very timid and is easily frightened.",
         dateLostOrFound: "2019-11-07",
