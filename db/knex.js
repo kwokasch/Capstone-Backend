@@ -1,7 +1,7 @@
-const environment = process.env.NODE_ENV || 'development';
+const environment = require('../knexfile').production;
 const config = require('../knexfile');
 const environmentConfig = config[environment];
 const knex = require('knex');
-const connection = knex(environmentConfig)
+const connection = knex(environment)
 
 module.exports = connection

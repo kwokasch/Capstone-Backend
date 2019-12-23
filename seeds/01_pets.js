@@ -1,4 +1,4 @@
-const pets = require("../pets_seeds")
+const pets = require("./pets_seeds")
 
 exports.seed = function(knex) {
   // Deletes ALL existing entries
